@@ -1,38 +1,83 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: rgb(72, 98, 110);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+justify-content: space-between;
+  width: 95vw;
+  margin-left: 1rem;
+  height: 9.8vh;
+  font-size: 30px;
+  font-weight: bolder;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(31, 60, 74);
+  border-bottom: 2px solid rgb(31, 60, 74);
+}
+.searchBar {
+  display: flex;
+  align-items: center;
+  width: calc(60% - 13rem);
+  margin-left: 1rem;
+  border: 2px solid rgb(31, 60, 74);
+  border-radius: 1rem;
+  background-color: rgb(128, 150, 160);
+  justify-content: space-between;
+}
+.search {
+  height: 5vh;
+  font-size: 20px;
+  font-weight: 300;
+  padding-left: 1rem;
+  border: none;
+  background: none;
+}
+.search:focus {
+  outline: none; /* when clicked removes blue outline */
 }
 
-.App-link {
-  color: #61dafb;
+.cancel {
+  padding-right: 1rem;
+  font-size: 30px;
+  font-weight: 900;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: rgb(31, 60, 74);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cancel:hover {
+  color : rgb(244, 77, 77)
+}
+
+.pageNumber {
+  width: 5rem;
+  margin-left: 1rem;
+  font-weight: 200;
+  text-align: center;
+  border-right: 1px solid rgb(128, 150, 160);
+  border-left: 1px solid rgb(128, 150, 160);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardRow {
+  padding-top: 1rem;
+  padding-left: 5%;
+  height: 80vh;
+  overflow: scroll;
+  gap: 30px 0px;
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+}
+.cardRow::-webkit-scrollbar {
+  display: none;
 }

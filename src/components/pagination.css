@@ -1,0 +1,17 @@
+.btnRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 8vh;
+  gap: 1rem;
+}
+.btn{
+    margin-top: .5rem;
+    height: 3rem;
+    width: 3rem;
+    color: rgb(20, 51, 66);
+}
+
+.btn:hover{
+cursor: pointer;
+color: aquamarine;}

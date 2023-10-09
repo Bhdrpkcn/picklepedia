@@ -1,0 +1,39 @@
+.filter {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 80dvh;
+  border-right: 1px solid rgb(31, 60, 74);
+}
+
+.mainClass {
+  border: 1px solid rgb(31, 60, 74);
+  height: 2rem;
+  border-radius: 0.5rem;
+  font-size: 16px;
+  background-color: rgb(128, 150, 160);
+}
+.mainClass:hover {
+  background-color: rgb(95, 170, 205);
+  cursor: pointer;
+  color: rgb(10, 90, 130);
+}
+
+.filterButton {
+  display: flex;
+  flex-direction: column;
+  margin: 0.25rem 0.5rem;
+  height: 2rem;
+  width: 180px;
+  border: 1px solid rgb(31, 60, 74);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  background-color: rgb(173, 199, 211);
+}
+.filterButton:hover {
+  background-color: rgb(131, 180, 202);
+  cursor: pointer;
+  color: rgb(10, 90, 130);
+}
+
