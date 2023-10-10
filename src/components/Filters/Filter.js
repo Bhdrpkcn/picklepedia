@@ -4,65 +4,68 @@ import Gender from "./Category/Gender";
 import Species from "./Category/Species";
 import "./filter.css";
 const Filter = ({ setStatus, setSpecies, setGender, setPageNumber }) => {
-//TO FIX when clicking filtering button Main Status button is closing
+  //TO FIX when clicking filtering button Main Status button is closing
   // openning/closing (Gender, Species, Status) tags
-  const [genderOpen, setGenderOpen] = useState(false);
-  const [speciesOpen, setSpeciesOpen] = useState(false);
-  const [statusOpen, setStatusOpen] = useState(false);
 
-  // Kategori açma fonksiyonları
-  const toggleGender = () => {
-    setGenderOpen(!genderOpen);
-    // to close other components when open
-    setSpeciesOpen(false);
-    setStatusOpen(false);
+  const [filters, setFilters] = useState({
+    isGenderOpen: false,
+    isSpeciesOpen: false,
+    isStatusOpen: false,
+  });
+
+  const toggleFilterStatus = (key) => {
+    const newFilters = { ...filters };
+    //["isGenderOpen", "isSpeciesOpen", "isStatusOpen"]
+    Object.keys(newFilters).forEach((filterKey) => {
+      newFilters[filterKey] = false;
+    });
+    newFilters[key] = true;
+    console.log(newFilters);
+
+    setFilters(newFilters);
   };
 
-  const toggleSpecies = () => {
-    setSpeciesOpen(!speciesOpen);
-    // to close other components when open
-    setGenderOpen(false);
-    setStatusOpen(false);
-  };
+  // TODO 1 component indir ve map ile dön
 
-  const toggleStatus = () => {
-    setStatusOpen(!statusOpen);
-    // to close other components when open
-    setGenderOpen(false);
-    setSpeciesOpen(false);
-  };
-
-  
   return (
     <div>
-    <div className="filter">
-      <button className="mainClass" onClick={toggleStatus}>
-        Status
-      </button>
-      {statusOpen && (
-        <div>
-          <Status setStatus={setStatus} setPageNumber={setPageNumber}/>
-        </div>
-      )}
+      <div className="filter">
+        <button
+          className="mainClass"
+          onClick={() => toggleFilterStatus("isStatusOpen")}
+        >
+          Status
+        </button>
+        {filters.isStatusOpen && (
+          <div>
+            <Status setStatus={setStatus} setPageNumber={setPageNumber} />
+          </div>
+        )}
 
-      <button className="mainClass" onClick={toggleSpecies}>
-        Species
-      </button>
-      {speciesOpen && (
-        <div>
-          <Species setSpecies={setSpecies} setPageNumber={setPageNumber} />
-        </div>
-      )}
+        <button
+          className="mainClass"
+          onClick={() => toggleFilterStatus("isSpeciesOpen")}
+        >
+          Species
+        </button>
+        {filters.isSpeciesOpen && (
+          <div>
+            <Species setSpecies={setSpecies} setPageNumber={setPageNumber} />
+          </div>
+        )}
 
-      <button className="mainClass" onClick={toggleGender}>
-        Gender
-      </button>
-      {genderOpen && (
-        <div>
-          <Gender setGender={setGender} setPageNumber={setPageNumber} />
-        </div>
-      )}
-    </div>
+        <button
+          className="mainClass"
+          onClick={() => toggleFilterStatus("isGenderOpen")}
+        >
+          Gender
+        </button>
+        {filters.isGenderOpen && (
+          <div>
+            <Gender setGender={setGender} setPageNumber={setPageNumber} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

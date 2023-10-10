@@ -2,9 +2,11 @@ import React from "react";
 import "./card.css";
 
 export const Card = ({ results, episodeResults }) => {
+  console.log(results)
   if (!episodeResults || !results) {
     return <div className="warningMessage">No pickle Found...</div>;
   }
+
 
   let display;
 
@@ -17,21 +19,21 @@ export const Card = ({ results, episodeResults }) => {
 
       let characterEpisodeIds = episode.map((epi) =>
         epi.replace(`https://rickandmortyapi.com/api/episode/`, "")
-      );
-      console.log(characterEpisodeIds);
-      let characterEpisodes = episodeResults.filter((episode) =>
+        );
+        
+        let characterEpisodes = episodeResults.filter((episode) =>
         characterEpisodeIds.includes(episode.id.toString())
-      );
-
-      let badgeClassName = "";
-
-      if (status === "Alive") {
-        badgeClassName = "statusAlive";
-      } else if (status === "Dead") {
-        badgeClassName = "statusDead";
-      } else if (status === "unknown") {
-        badgeClassName = "statusUnknown";
-      }
+        );
+       
+        let badgeClassName = "";
+        
+        if (status === "Alive") {
+          badgeClassName = "statusAlive";
+        } else if (status === "Dead") {
+          badgeClassName = "statusDead";
+        } else if (status === "unknown") {
+          badgeClassName = "statusUnknown";
+        }
 
       return (
         <div key={id} className="card">
@@ -63,6 +65,5 @@ export const Card = ({ results, episodeResults }) => {
   } else {
     display = "No pickle Found";
   }
-
   return <>{display}</>;
 };

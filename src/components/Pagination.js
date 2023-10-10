@@ -1,11 +1,6 @@
 import React from "react";
 import "./pagination.css";
-import {
-  MdOutlineFirstPage,
-  MdOutlineLastPage,
-  MdNavigateBefore,
-  MdNavigateNext,
-} from "react-icons/md";
+
 function Pagination({ setPageNumber, pageNumber, maxPageNumber }) {
   //we collect the data from App.js for setting buttons
   let next = () => {
@@ -27,10 +22,10 @@ function Pagination({ setPageNumber, pageNumber, maxPageNumber }) {
 
   return (
     <div className="btnRow">
-      <MdOutlineFirstPage className="btn" onClick={firstPage} />
-      <MdNavigateBefore className="btn" onClick={prev} />
-      <MdNavigateNext className="btn" onClick={next} />
-      <MdOutlineLastPage className="btn" onClick={lastPage} />
+      <button className="btn" onClick={firstPage} />
+      <button className="btn" onClick={prev} />
+      <button className="btn" onClick={next} />
+      <button className="btn" onClick={lastPage} />
     </div>
   );
 }

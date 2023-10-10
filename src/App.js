@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Card } from "./components/Card";
 import { Locations } from "./components/Locations";
 import { Episodes } from "./components/Episodes";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Pagination from "./components/Pagination";
 import Search from "./components/Search";
 import Background from "./Backgound";
@@ -11,13 +11,24 @@ import Filter from "./components/Filters/Filter";
 import Navbar from "./components/Navbar";
 
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const searchParams = new URLSearchParams(location.search);
+  const initialPage = parseInt(searchParams.get("page")) || 1;
+  const initialSearch = searchParams.get("name") || "";
+  const initialStatus = searchParams.get("status") || "";
+  const initialSpecies = searchParams.get("species") || "";
+  const initialGender = searchParams.get("gender") || "";
+  let [isLoading, setIsLoading] = useState(false); // Yüklenme durumu ekleyin
+
   //we using useState to run setPageNumber function to update the state when pageNumber variable changes..
-  let [pageNumber, setPageNumber] = useState(1);
+  let [pageNumber, setPageNumber] = useState(initialPage);
   let [maxPageNumber, setMaxPageNumber] = useState(); //we get the maxPageNumber data from api
-  let [search, setSearch] = useState(""); //to run setSearch function to store search data from api
-  let [status, setStatus] = useState(""); //to filter char. status
-  let [species, setSpecies] = useState(""); //to filter char. species
-  let [gender, setGender] = useState(""); //to filter char. species
+  let [search, setSearch] = useState(initialSearch); //to run setSearch function to store search data from api
+  let [status, setStatus] = useState(initialStatus); //to filter char. status
+  let [species, setSpecies] = useState(initialSpecies); //to filter char. species
+  let [gender, setGender] = useState(initialGender); //to filter char. species
   /*
   with "useState" we can store the data in a variable,
   and we will have a function key to change the variable data whenever the useEffect hook fetches new data.
@@ -31,7 +42,7 @@ function App() {
   //all inside now ! (info and results) :) we're gonna pass results to Card.js
   //and pass info to Pagination.js ..
   let { info, results } = fetchedData;
-  let { infoEpisodes, episodeResults } = fetchedEpisodeData;
+  let { info:infoEpisodes, results:episodeResults } = fetchedEpisodeData;
 
   //Stored the api Character link into a variable for easy use and understandable code.
   /* we using ${pageNumber} and ${search} for setting states getting changes etc.
@@ -60,43 +71,56 @@ function App() {
  */
 
   useEffect(() => {
-    (async function () {
-      let data = await fetch(api).then((res) => res.json());
-      updateFetchedData(data);
+    const fetchData = async function () {
+      try {
+        setIsLoading(true);
+        // API'ye iki ayrı istek gönderiyoruz: biri karakter verilerini almak için, diğeri bölüm verilerini almak için.
+        let dataPromise = fetch(api).then((res) => res.json());
+        let episodeDataPromise = fetch(api2).then((res) => res.json());
 
-      if (data.info) {
-        setMaxPageNumber(data.info.pages); //Getting maxPageNumber data with func. to maxPageNumber variable.
-      } else {
-        setMaxPageNumber(1); // Varsayılan olarak bir değeri kullanabilirsiniz.
+        // İki isteği eşzamanlı olarak beklemek için Promise.all kullanıyoruz.
+        let [data, episodeData] = await Promise.all([
+          dataPromise,
+          episodeDataPromise,
+        ]);
+
+        // Alınan karakter ve bölüm verilerini bileşenlerin kullanabileceği şekilde güncelliyoruz.
+        updateFetchedData(data); // Karakter verileri
+        updateEpisodeFetchedData(episodeData); // Bölüm verileri
+
+        // Karakter verileri içinde sayfalama bilgisi (info) varsa, max sayfa sayısını güncelliyoruz. Aksi takdirde varsayılan değeri kullanıyoruz.
+        if (data.info) {
+          setMaxPageNumber(data.info.pages);
+        } else {
+          setMaxPageNumber(1);
+        }
+
+        // Veriler yüklendikten sonra yükleme durumunu "false" olarak güncelliyoruz.
+        setIsLoading(false);
+
+        // Filtreleme seçeneklerini ve sayfa numarasını URL'de güncelliyoruz.
+        const queryParams = new URLSearchParams({
+          page: pageNumber,
+          name: search,
+          status: status,
+          species: species,
+          gender: gender,
+        });
+        navigate(`?${queryParams.toString()}`, { replace: true });
+      } catch (error) {
+        console.error("Veriler alınırken bir hata oluştu", error);
+        setIsLoading(false); // Hata durumunu ele alın
       }
+    };
+    fetchData();
+  }, [api, api2, pageNumber, search, status, species, gender, navigate]);
 
-      // Bölüm verilerini tüm sayfalardan çek
-      let allEpisodeResults = [];
-      let episodeData = await fetch(api2).then((res) => res.json());
-      allEpisodeResults = allEpisodeResults.concat(episodeData.results);
-
-      // Diğer sayfaları döngü ile çağır
-      while (episodeData.info && episodeData.info.next) {
-        episodeData = await fetch(episodeData.info.next).then((res) =>
-          res.json()
-        );
-        allEpisodeResults = allEpisodeResults.concat(episodeData.results);
-      }
-
-      updateEpisodeFetchedData({ results: allEpisodeResults });
-
-      Promise.all([data, episodeData]);
-    })();
-  }, [api, api2]); // "[api]" is SIDEEFFECT, so if api changes useEffect reRun and runs updateFetchedData function/so fetchedData will be updated!
-  //we create a handler That returns page 1 but FIX !!! >> when you search something it returns first page of the search results..
-
-  let homePage = () => {
+  const homePage = () => {
     setSearch("");
     setStatus("");
     setSpecies("");
     setGender("");
     setPageNumber(1);
-    console.log("home clicked");
   };
 
   function CharacterContainer({ results }) {
