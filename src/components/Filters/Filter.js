@@ -3,9 +3,13 @@ import Status from "./Category/Status";
 import Gender from "./Category/Gender";
 import Species from "./Category/Species";
 import "./filter.css";
+
 const Filter = ({ setStatus, setSpecies, setGender, setPageNumber }) => {
-  //TO FIX when clicking filtering button Main Status button is closing
-  // openning/closing (Gender, Species, Status) tags
+  const filterOptions = [
+    { key: "isStatusOpen", label: "Status", component: <Status setStatus={setStatus} setPageNumber={setPageNumber} /> },
+    { key: "isSpeciesOpen", label: "Species", component: <Species setSpecies={setSpecies} setPageNumber={setPageNumber} /> },
+    { key: "isGenderOpen", label: "Gender", component: <Gender setGender={setGender} setPageNumber={setPageNumber} /> },
+  ];
 
   const [filters, setFilters] = useState({
     isGenderOpen: false,
@@ -15,56 +19,67 @@ const Filter = ({ setStatus, setSpecies, setGender, setPageNumber }) => {
 
   const toggleFilterStatus = (key) => {
     const newFilters = { ...filters };
-    //["isGenderOpen", "isSpeciesOpen", "isStatusOpen"]
     Object.keys(newFilters).forEach((filterKey) => {
       newFilters[filterKey] = false;
     });
-    newFilters[key] = true;
-    console.log(newFilters);
+    newFilters[key] = !newFilters[key]; // Toggle the status
 
+    // Update the filterStatus state
     setFilters(newFilters);
+
+    // Update the URL with the new filter status
+    updateURLWithFilterStatus(newFilters);
   };
 
-  // TODO 1 component indir ve map ile dön
+  // Function to update the URL with the filter status
+  const updateURLWithFilterStatus = (newFilters) => {
+    const searchParams = new URLSearchParams();
+    Object.keys(newFilters).forEach((filterKey) => {
+      searchParams.set(filterKey, newFilters[filterKey]);
+    });
+
+    // Replace the current URL with the updated search parameters
+    window.history.replaceState(null, null, `?${searchParams.toString()}`);
+  };
+
+  // Function to get filter status from URL and set the initial state
+  const getFilterStatusFromURL = () => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const initialFilters = { ...filters };
+    Object.keys(initialFilters).forEach((filterKey) => {
+      initialFilters[filterKey] = searchParams.get(filterKey) === "true";
+    });
+    return initialFilters;
+  };
+
+  // Get the initial filter status from the URL
+  useEffect(() => {
+    setFilters(getFilterStatusFromURL());
+  }, []);
+
+  // Save filter status to local storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("filterStatus", JSON.stringify(filters));
+  }, [filters]);
 
   return (
     <div>
       <div className="filter">
-        <button
-          className="mainClass"
-          onClick={() => toggleFilterStatus("isStatusOpen")}
-        >
-          Status
-        </button>
-        {filters.isStatusOpen && (
-          <div>
-            <Status setStatus={setStatus} setPageNumber={setPageNumber} />
+        {filterOptions.map((option) => (
+          <div key={option.key}>
+            <button
+              className={`mainClass ${filters[option.key] ? "active" : ""}`}
+              onClick={() => toggleFilterStatus(option.key)}
+            >
+              {option.label}
+            </button>
+            {filters[option.key] && (
+              <div>
+                {option.component}
+              </div>
+            )}
           </div>
-        )}
-
-        <button
-          className="mainClass"
-          onClick={() => toggleFilterStatus("isSpeciesOpen")}
-        >
-          Species
-        </button>
-        {filters.isSpeciesOpen && (
-          <div>
-            <Species setSpecies={setSpecies} setPageNumber={setPageNumber} />
-          </div>
-        )}
-
-        <button
-          className="mainClass"
-          onClick={() => toggleFilterStatus("isGenderOpen")}
-        >
-          Gender
-        </button>
-        {filters.isGenderOpen && (
-          <div>
-            <Gender setGender={setGender} setPageNumber={setPageNumber} />
-          </div>
-        )}
+        ))}
       </div>
     </div>
   );

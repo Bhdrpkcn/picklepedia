@@ -2,7 +2,7 @@ import React from "react";
 import "./card.css";
 
 export const Card = ({ results, episodeResults }) => {
-  console.log(results)
+
   if (!episodeResults || !results) {
     return <div className="warningMessage">No pickle Found...</div>;
   }
