@@ -18,7 +18,7 @@
 .badge {
   position: relative;
   z-index: 1;
-  top: -400px; /* İstenilen üst konumu ayarlayın */
+  top: -370px; /* İstenilen üst konumu ayarlayın */
   right: -160px; /* İstenilen sağ konumu ayarlayın */
   width: 70px;
   padding: 5px 10px; /* İstenilen dolgu değerlerini ayarlayın */
@@ -50,6 +50,7 @@
 .cardInfo {
   z-index: 1;
   padding: 0.5rem;
+  height: 7rem;
 }
 .cardName {
   display: flex;

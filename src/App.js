@@ -113,7 +113,6 @@ function App() {
           setSpecies={setSpecies}
           setGender={setGender}
           setPageNumber={setPageNumber}
-          
         />
         <div className="cardRow">
           <Card results={results} episodeResults={fetchedEpisodeData.results} />
@@ -126,12 +125,10 @@ function App() {
     return (
       <div className="container">
         {/* FIX THE FILTERING for EPISODES ! */}
-        <Filter
-          setStatus={setStatus}
-          setSpecies={setSpecies}
-          setGender={setGender}
-          setPageNumber={setPageNumber}
-        />
+        <div className="filter">
+          <button className="mainClass">in Progress..</button>
+          <button className="mainClass">in Progress..</button>
+        </div>
         <div className="cardRow">
           <Episodes />
           {/* FIX Episodes needed will be passed DATA's ! */}
@@ -143,12 +140,10 @@ function App() {
     return (
       <div className="container">
         {/* FIX THE FILTERING for LOCATION ! */}
-        <Filter
-          setStatus={setStatus}
-          setSpecies={setSpecies}
-          setGender={setGender}
-          setPageNumber={setPageNumber}
-        />
+        <div className="filter">
+          <button className="mainClass">in Progress..</button>
+          <button className="mainClass">in Progress..</button>
+        </div>
         <div className="cardRow">
           <Locations />
           {/* FIX Locations needed will be passed DATA's ! */}
@@ -173,7 +168,11 @@ function App() {
         <Route
           path="/characters"
           element={
-            <CharacterContainer results={results} setFilterStatus={setFilterStatus} filterStatus={filterStatus} />
+            <CharacterContainer
+              results={results}
+              setFilterStatus={setFilterStatus}
+              filterStatus={filterStatus}
+            />
           }
         />
         <Route
