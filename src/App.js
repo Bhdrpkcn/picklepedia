@@ -211,7 +211,7 @@ function App() {
           }
         />
         <Route
-          path="/characters"
+          path="/characters/"
           element={
             <CharacterContainer
               results={results}
@@ -221,11 +221,11 @@ function App() {
           }
         />
         <Route
-          path="/episodes"
+          path="/episodes/"
           element={<EpisodeContainer results={results} />}
         />
         <Route
-          path="/locations"
+          path="/locations/"
           element={<LocationContainer results={results} />}
         />
       </Routes>
