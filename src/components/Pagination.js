@@ -1,5 +1,7 @@
 import React from "react";
 import "./pagination.css";
+import { BiFirstPage, BiLastPage } from "react-icons/bi";
+import { MdNavigateBefore, MdNavigateNext} from "react-icons/md";
 
 function Pagination({ setPageNumber, pageNumber, maxPageNumber }) {
   //we collect the data from App.js for setting buttons
@@ -13,19 +15,19 @@ function Pagination({ setPageNumber, pageNumber, maxPageNumber }) {
   };
   let firstPage = () => {
     if (pageNumber === 1) return;
-    setPageNumber(1)
-  }
+    setPageNumber(1);
+  };
   let lastPage = () => {
     if (pageNumber === maxPageNumber) return;
-    setPageNumber(maxPageNumber)
-  }
+    setPageNumber(maxPageNumber);
+  };
 
   return (
     <div className="btnRow">
-      <button className="btn" onClick={firstPage} />
-      <button className="btn" onClick={prev} />
-      <button className="btn" onClick={next} />
-      <button className="btn" onClick={lastPage} />
+      <BiFirstPage className="btn" onClick={firstPage} />
+      <MdNavigateBefore className="btn" onClick={prev} />
+      <MdNavigateNext className="btn" onClick={next} />
+      <BiLastPage className="btn" onClick={lastPage} />
     </div>
   );
 }

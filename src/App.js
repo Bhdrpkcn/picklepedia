@@ -108,6 +108,7 @@ function App() {
 
   function CharacterContainer({ results }) {
     return (
+      <div>
       <div className="container">
         <Filter
           setStatus={setStatus}
@@ -119,11 +120,18 @@ function App() {
           <Card results={results} episodeResults={fetchedEpisodeData.results} />
         </div>
       </div>
+      <Pagination
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+        maxPageNumber={maxPageNumber}
+      />
+      </div>
     );
   }
 
   function EpisodeContainer() {
     return (
+      <div>
       <div className="container">
         {/* FIX THE FILTERING for EPISODES ! */}
         <div className="filter">
@@ -134,11 +142,19 @@ function App() {
           <Episodes />
           {/* FIX Episodes needed will be passed DATA's ! */}
         </div>
+        
+      </div>
+      <Pagination
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+        maxPageNumber={maxPageNumber}
+      />
       </div>
     );
   }
   function LocationContainer() {
     return (
+      <div>
       <div className="container">
         {/* FIX THE FILTERING for LOCATION ! */}
         <div className="filter">
@@ -149,6 +165,12 @@ function App() {
           <Locations />
           {/* FIX Locations needed will be passed DATA's ! */}
         </div>
+      </div>
+      <Pagination
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+        maxPageNumber={maxPageNumber}
+      />
       </div>
     );
   }
@@ -208,11 +230,6 @@ function App() {
         />
       </Routes>
 
-      <Pagination
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-        maxPageNumber={maxPageNumber}
-      />
       <Background />
     </div>
   );
