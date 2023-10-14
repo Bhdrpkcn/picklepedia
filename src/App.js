@@ -211,7 +211,7 @@ function App() {
           }
         />
         <Route
-          path="/picklepedia/characters/"
+          path="/characters/"
           element={
             <CharacterContainer
               results={results}
