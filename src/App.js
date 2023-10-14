@@ -6,7 +6,8 @@ import { Episodes } from "./components/Episodes";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Pagination from "./components/Pagination";
 import Search from "./components/Search";
-import Background from "./Backgound";
+import Background from "./animations/Backgound";
+import OpeningAnim from "./animations/OpeningAnim";
 import Filter from "./components/Filters/Filter";
 import Navbar from "./components/Navbar";
 
@@ -170,7 +171,18 @@ function App() {
           element={
             <div className="container">
             <div className="cardRow">
-              welcome
+              <OpeningAnim/>
+            </div>
+          </div>
+            
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <div className="container">
+            <div className="cardRow">
+              <OpeningAnim/>
             </div>
           </div>
             

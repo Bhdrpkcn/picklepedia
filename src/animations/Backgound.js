@@ -1,6 +1,8 @@
 import React from "react";
 import "./background.css";
-import pickle from "./images/logo512.png"
+import pickle from "../images/logo512.png"
+
+
 function Background() {
   
 

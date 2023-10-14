@@ -1,0 +1,46 @@
+.welcomeText {
+  top: 20vh;
+  left: 5vw;
+  width: 60vw;
+  height: 30vh;
+  position: absolute;
+  z-index: 2;
+  font-size: 7rem;
+  font-weight: bolder;
+  color: rgb(96, 193, 239);
+
+}
+
+.mainOpeningGrid {
+  z-index: 1;
+  position: relative;
+  left: 5rem;
+  display: grid;
+  place-content: center;
+  padding-left: 2rem; /* Varsayılan padding değeri yerine istediğiniz değeri kullanabilirsiniz */
+  padding-right: 2rem; /* Varsayılan padding değeri yerine istediğiniz değeri kullanabilirsiniz */
+}
+
+.group {
+  position: relative;
+  cursor: crosshair;
+  border-radius: 50%;
+  padding: 0.1rem; /* Varsayılan değeri yerine dilediğiniz değeri kullanabilirsiniz. */
+  transition: color 0.3s; /* Geçiş süresini dilediğiniz değere ayarlayabilirsiniz. */
+}
+
+.dot-point {
+  width: 1rem; /* İstediğiniz boyutu ayarlayabilirsiniz */
+  height: 1rem; /* İstediğiniz boyutu ayarlayabilirsiniz */
+  border-radius: 30%;
+  background: rgb(67, 91, 102);
+}
+
+.dot-point:hover {
+  background:rgb(96, 193, 239);
+}
+
+.custom-grid {
+  display: grid;
+  width: fit-content;
+}
