@@ -211,7 +211,7 @@ function App() {
           }
         />
         <Route
-          path="/characters/"
+          path="/picklepedia/characters/"
           element={
             <CharacterContainer
               results={results}
@@ -221,11 +221,11 @@ function App() {
           }
         />
         <Route
-          path="/episodes/"
+          path="/picklepedia/episodes/"
           element={<EpisodeContainer results={results} />}
         />
         <Route
-          path="/locations/"
+          path="/picklepedia/locations/"
           element={<LocationContainer results={results} />}
         />
       </Routes>
