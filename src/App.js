@@ -166,6 +166,17 @@ function App() {
       </div>
       <Routes>
         <Route
+          path="/picklepedia"
+          element={
+            <div className="container">
+            <div className="cardRow">
+              welcome
+            </div>
+          </div>
+            
+          }
+        />
+        <Route
           path="/characters"
           element={
             <CharacterContainer
