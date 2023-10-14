@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/picklepedia/static/css/main.9f16a738.css",
-    "main.js": "/picklepedia/static/js/main.2bb208d7.js",
+    "main.js": "/picklepedia/static/js/main.7669589c.js",
     "static/js/787.24c2ed8d.chunk.js": "/picklepedia/static/js/787.24c2ed8d.chunk.js",
     "static/media/logo512.png": "/picklepedia/static/media/logo512.a3782c0db8315c72cd07.png",
     "index.html": "/picklepedia/index.html",
     "main.9f16a738.css.map": "/picklepedia/static/css/main.9f16a738.css.map",
-    "main.2bb208d7.js.map": "/picklepedia/static/js/main.2bb208d7.js.map",
+    "main.7669589c.js.map": "/picklepedia/static/js/main.7669589c.js.map",
     "787.24c2ed8d.chunk.js.map": "/picklepedia/static/js/787.24c2ed8d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9f16a738.css",
-    "static/js/main.2bb208d7.js"
+    "static/js/main.7669589c.js"
   ]
 }
