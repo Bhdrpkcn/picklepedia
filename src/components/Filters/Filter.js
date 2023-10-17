@@ -25,16 +25,16 @@ const Filter = ({ setStatus, setSpecies, setGender, setPageNumber }) => {
   const toggleFilterStatus = (key) => {
     const newFilterStatus = { ...filterStatus };
     
-    newFilterStatus[key] = !newFilterStatus[key]; // Toggle the status
+    newFilterStatus[key] = !newFilterStatus[key]; 
 
-    // Update the filterStatus state
+
     setFilterStatus(newFilterStatus);
 
-    // Update the URL with the new filter status
+
     updateURLWithFilterStatus(newFilterStatus);
   };
 
-  // Function to update the URL with the filter status
+
   const updateURLWithFilterStatus = (newFilterStatus) => {
     const searchParams = new URLSearchParams();
     Object.keys(newFilterStatus).forEach((filterKey) => {

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Card } from "./components/Card";
 import { Locations } from "./components/Locations";
 import { Episodes } from "./components/Episodes";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { HashRouter, Route, useNavigate, useLocation } from "react-router-dom";
 import Pagination from "./components/Pagination";
 import Search from "./components/Search";
 import Background from "./animations/Backgound";
@@ -187,7 +187,7 @@ function App() {
         <Search setSearch={setSearch} setPageNumber={setPageNumber} />
         <Navbar />
       </div>
-      <Routes>
+      <HashRouter>
         <Route
           path="/picklepedia"
           element={
@@ -228,7 +228,7 @@ function App() {
           path="/picklepedia/locations/"
           element={<LocationContainer results={results} />}
         />
-      </Routes>
+      </HashRouter>
 
       <Background />
     </div>
