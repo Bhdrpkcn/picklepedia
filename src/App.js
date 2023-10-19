@@ -20,6 +20,7 @@ function App() {
   const initialStatus = searchParams.get("status") || "";
   const initialSpecies = searchParams.get("species") || "";
   const initialGender = searchParams.get("gender") || "";
+  // eslint-disable-next-line
   let [isLoading, setIsLoading] = useState(false);
 
   let [pageNumber, setPageNumber] = useState(initialPage);
@@ -28,7 +29,7 @@ function App() {
   let [status, setStatus] = useState(initialStatus);
   let [species, setSpecies] = useState(initialSpecies);
   let [gender, setGender] = useState(initialGender);
-
+  // eslint-disable-next-line
   const [filterStatus, setFilterStatus] = useState({
     isStatusOpen: searchParams.get("isStatusOpen") === "true",
     isSpeciesOpen: searchParams.get("isSpeciesOpen") === "true",
@@ -37,8 +38,9 @@ function App() {
 
   let [fetchedData, updateFetchedData] = useState([]);
   let [fetchedEpisodeData, updateEpisodeFetchedData] = useState([]);
-
+  // eslint-disable-next-line
   let { info, results } = fetchedData;
+  // eslint-disable-next-line
   let { info: infoEpisodes, results: episodeResults } = fetchedEpisodeData;
 
   let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}&species=${species}&gender=${gender}`;
@@ -74,14 +76,11 @@ function App() {
           status: status,
           species: species,
           gender: gender,
-          isStatusOpen: filterStatus.isStatusOpen,
-          isSpeciesOpen: filterStatus.isSpeciesOpen,
-          isGenderOpen: filterStatus.isGenderOpen,
         });
         navigate(`?${queryParams.toString()}`, { replace: true });
       } catch (error) {
-        console.error("Veriler alınırken bir hata oluştu", error);
-        setIsLoading(false); 
+        console.error("Error occured while getting data", error);
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -108,22 +107,25 @@ function App() {
   function CharacterContainer({ results }) {
     return (
       <div>
-      <div className="container">
-        <Filter
-          setStatus={setStatus}
-          setSpecies={setSpecies}
-          setGender={setGender}
-          setPageNumber={setPageNumber}
-        />
-        <div className="cardRow">
-          <Card results={results} episodeResults={fetchedEpisodeData.results} />
+        <div className="container">
+          <Filter
+            setStatus={setStatus}
+            setSpecies={setSpecies}
+            setGender={setGender}
+            setPageNumber={setPageNumber}
+          />
+          <div className="cardRow">
+            <Card
+              results={results}
+              episodeResults={fetchedEpisodeData.results}
+            />
+          </div>
         </div>
-      </div>
-      <Pagination
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-        maxPageNumber={maxPageNumber}
-      />
+        <Pagination
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          maxPageNumber={maxPageNumber}
+        />
       </div>
     );
   }
@@ -131,45 +133,44 @@ function App() {
   function EpisodeContainer() {
     return (
       <div>
-      <div className="container">
+        <div className="container">
           {/* in progress */}
           <div className="filter">
-          <button className="mainClass">in Progress..</button>
-          <button className="mainClass">in Progress..</button>
-        </div>
-        <div className="cardRow">
-          <Episodes />
-          {/* in progress */}
+            <button className="mainClass">in Progress..</button>
+            <button className="mainClass">in Progress..</button>
           </div>
-        
-      </div>
-      <Pagination
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-        maxPageNumber={maxPageNumber}
-      />
+          <div className="cardRow">
+            <Episodes />
+            {/* in progress */}
+          </div>
+        </div>
+        <Pagination
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          maxPageNumber={maxPageNumber}
+        />
       </div>
     );
   }
   function LocationContainer() {
     return (
       <div>
-      <div className="container">
+        <div className="container">
           {/* in progress */}
           <div className="filter">
-          <button className="mainClass">in Progress..</button>
-          <button className="mainClass">in Progress..</button>
+            <button className="mainClass">in Progress..</button>
+            <button className="mainClass">in Progress..</button>
+          </div>
+          <div className="cardRow">
+            <Locations />
+            {/* in progress */}
+          </div>
         </div>
-        <div className="cardRow">
-          <Locations />
-          {/* in progress */}
-        </div>
-      </div>
-      <Pagination
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-        maxPageNumber={maxPageNumber}
-      />
+        <Pagination
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          maxPageNumber={maxPageNumber}
+        />
       </div>
     );
   }
@@ -187,26 +188,7 @@ function App() {
         <Navbar />
       </div>
       <Routes>
-        <Route
-          path="/picklepedia"
-          element={
-            <CharacterContainer
-              results={results}
-              setFilterStatus={setFilterStatus}
-              filterStatus={filterStatus}
-            />
-          }
-        />
-        <Route
-          path="/characters"
-          element={
-            <CharacterContainer
-              results={results}
-              setFilterStatus={setFilterStatus}
-              filterStatus={filterStatus}
-            />
-          }
-        />
+        <Route path="/" element={<CharacterContainer results={results} />} />
         <Route
           path="/episodes"
           element={<EpisodeContainer results={results} />}

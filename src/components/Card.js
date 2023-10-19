@@ -12,7 +12,7 @@ export const Card = ({ results, episodeResults }) => {
 
   if (results) {
     display = results.map((result) => {
-      let { id, name, location, image, status, species, episode, characters } =
+      let { id, name, location, image, status, species, episode } =
         result;
 
 
