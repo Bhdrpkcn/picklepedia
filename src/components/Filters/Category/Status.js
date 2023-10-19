@@ -1,9 +1,9 @@
 import React from "react";
 
 const Status = ({ setStatus, setPageNumber }) => {
-  //to set filter Status ; dead - alive - unknown
+
   const handleStatusClick = (newStatus) => {
-    setStatus(newStatus); //Setting the status (in return section we enter what status type we want)
+    setStatus(newStatus);
     setPageNumber(1);
     console.log("worked status");
   };

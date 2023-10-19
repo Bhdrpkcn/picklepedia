@@ -4,13 +4,13 @@ import { BiFirstPage, BiLastPage } from "react-icons/bi";
 import { MdNavigateBefore, MdNavigateNext} from "react-icons/md";
 
 function Pagination({ setPageNumber, pageNumber, maxPageNumber }) {
-  //we collect the data from App.js for setting buttons
+
   let next = () => {
-    if (pageNumber === maxPageNumber) return; //we check if the next button reach api max page count and stop it to go next empty pages
+    if (pageNumber === maxPageNumber) return;
     setPageNumber((current) => current + 1);
   };
   let prev = () => {
-    if (pageNumber === 1) return; //to prevent "prev" click to go page-1,-2,-3 etc we set this rule!
+    if (pageNumber === 1) return; 
     setPageNumber((current) => current - 1);
   };
   let firstPage = () => {

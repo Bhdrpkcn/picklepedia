@@ -3,11 +3,10 @@ import React, { useState, useEffect } from "react";
 import { Card } from "./components/Card";
 import { Locations } from "./components/Locations";
 import { Episodes } from "./components/Episodes";
-import { HashRouter, Route, useNavigate, useLocation } from "react-router-dom";
+import { Route, useNavigate, useLocation, Routes } from "react-router-dom";
 import Pagination from "./components/Pagination";
 import Search from "./components/Search";
 import Background from "./animations/Backgound";
-import OpeningAnim from "./animations/OpeningAnim";
 import Filter from "./components/Filters/Filter";
 import Navbar from "./components/Navbar";
 
@@ -82,7 +81,7 @@ function App() {
         navigate(`?${queryParams.toString()}`, { replace: true });
       } catch (error) {
         console.error("Veriler alınırken bir hata oluştu", error);
-        setIsLoading(false); // Hata durumunu ele alın
+        setIsLoading(false); 
       }
     };
     fetchData();
@@ -133,15 +132,15 @@ function App() {
     return (
       <div>
       <div className="container">
-        {/* FIX THE FILTERING for EPISODES ! */}
-        <div className="filter">
+          {/* in progress */}
+          <div className="filter">
           <button className="mainClass">in Progress..</button>
           <button className="mainClass">in Progress..</button>
         </div>
         <div className="cardRow">
           <Episodes />
-          {/* FIX Episodes needed will be passed DATA's ! */}
-        </div>
+          {/* in progress */}
+          </div>
         
       </div>
       <Pagination
@@ -156,14 +155,14 @@ function App() {
     return (
       <div>
       <div className="container">
-        {/* FIX THE FILTERING for LOCATION ! */}
-        <div className="filter">
+          {/* in progress */}
+          <div className="filter">
           <button className="mainClass">in Progress..</button>
           <button className="mainClass">in Progress..</button>
         </div>
         <div className="cardRow">
           <Locations />
-          {/* FIX Locations needed will be passed DATA's ! */}
+          {/* in progress */}
         </div>
       </div>
       <Pagination
@@ -187,31 +186,9 @@ function App() {
         <Search setSearch={setSearch} setPageNumber={setPageNumber} />
         <Navbar />
       </div>
-      <HashRouter>
+      <Routes>
         <Route
           path="/picklepedia"
-          element={
-            <div className="container">
-            <div className="cardRow">
-              <OpeningAnim/>
-            </div>
-          </div>
-            
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <div className="container">
-            <div className="cardRow">
-              <OpeningAnim/>
-            </div>
-          </div>
-            
-          }
-        />
-        <Route
-          path="/characters/"
           element={
             <CharacterContainer
               results={results}
@@ -221,14 +198,24 @@ function App() {
           }
         />
         <Route
-          path="/picklepedia/episodes/"
+          path="/characters"
+          element={
+            <CharacterContainer
+              results={results}
+              setFilterStatus={setFilterStatus}
+              filterStatus={filterStatus}
+            />
+          }
+        />
+        <Route
+          path="/episodes"
           element={<EpisodeContainer results={results} />}
         />
         <Route
-          path="/picklepedia/locations/"
+          path="/locations"
           element={<LocationContainer results={results} />}
         />
-      </HashRouter>
+      </Routes>
 
       <Background />
     </div>

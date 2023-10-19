@@ -2,7 +2,7 @@ import React from "react";
 
 function Gender({ setGender, setPageNumber }) {
   const handleGenderClick = (newGender) => {
-    setGender(newGender); //Setting the gender (in return section we enter what gender type we want)
+    setGender(newGender); 
     setPageNumber(1);
   };
 

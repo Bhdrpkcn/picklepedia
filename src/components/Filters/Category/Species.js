@@ -1,7 +1,6 @@
 import React from "react";
 
 const SpeciesButton = ({ setSpecies, setPageNumber, species, onClick }) => {
-  //Setting the species (in return section we enter what species type we want)
   const handleSpeciesClick = () => {
     setSpecies(species);
     onClick();
@@ -44,10 +43,6 @@ const Species = ({ setSpecies, setPageNumber }) => {
         Clear
       </button>
       <div>
-        {/* bu kısımı 
-        <button onClick={() => handleSpeciesClick("Human")}>Human</button>
-        şeklinde de yazabilirsin ancak çok daha amele duruyor >> ORHUN , DRY ve Clean Code !!!!
-         */}
         {speciesTypes.map((species, index) => (
           <SpeciesButton
             key={index}

@@ -15,7 +15,6 @@ export const Card = ({ results, episodeResults }) => {
       let { id, name, location, image, status, species, episode, characters } =
         result;
 
-      // Karakterin bölümlerini bul
 
       let characterEpisodeIds = episode.map((epi) =>
         epi.replace(`https://rickandmortyapi.com/api/episode/`, "")
